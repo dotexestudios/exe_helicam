@@ -14,7 +14,7 @@ local githubRepo = "dotexestudios/exe_helicam"
 
 local function checkVersion()
     print(color .. logo .. white)
-    PerformHttpRequest("https://raw.githubusercontent.com/" .. githubRepo .. "/main/version", function(err, newestVersion, headers)
+    PerformHttpRequest("https://raw.githubusercontent.com/" .. githubRepo .. "/refs/heads/main/version", function(err, newestVersion, headers)
         if newestVersion then
             newestVersion = newestVersion:gsub("%s+", "")
             if newestVersion ~= currentVersion then
