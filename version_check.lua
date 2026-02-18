@@ -14,20 +14,20 @@ local githubRepo = "dotexestudios/exe_helicam"
 
 local function checkVersion()
     print(color .. logo .. white)
-    PerformHttpRequest("https://raw.githubusercontent.com/" .. githubRepo .. "/master/version", function(err, newestVersion, headers)
+    PerformHttpRequest("https://raw.githubusercontent.com/" .. githubRepo .. "/main/version", function(err, newestVersion, headers)
         if newestVersion then
             newestVersion = newestVersion:gsub("%s+", "")
             if newestVersion ~= currentVersion then
                 print("\n^1-------------------------------------------------------")
-                print(("^1[Update Available] ^7%s"):format(resourceName))
+                print(("^1[Update Available] ^7%s"):format(cache.resource))
                 print(("^3Current: ^7%s | ^2Latest: ^7%s"):format(currentVersion, newestVersion))
                 print(("^3Download: ^7https://github.com/%s"):format(githubRepo))
                 print("^1-------------------------------------------------------\n")
             else
-                print(("^2[Success] ^7%s is up to date (v%s)"):format(resourceName, currentVersion))
+                print(("^2[Success] ^7%s is up to date (v%s)"):format(cache.resource, currentVersion))
             end
         else
-            print(("^1[Error] ^7Could not check version for %s"):format(resourceName))
+            print(("^1[Error] ^7Could not check version for %s"):format(cache.resource))
         end
     end, "GET", "", "")
 end
