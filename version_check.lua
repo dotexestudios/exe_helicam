@@ -45,26 +45,26 @@ local function checkVersion()
                 local comparison = compareVersions(currentVersion, newestVersion)
 
                 if comparison == -1 then
-                    print("\n^1-------------------------------------------------------^4")
-                    print(("^1[Update Available] ^7%s^4"):format(cache.resource))
-                    print(("^3Current: ^7%s | ^2Latest: ^7%s^4"):format(currentVersion, newestVersion))
-                    print(("^5Notes: ^7%s^4"):format(description))
+                    print("\n^1-------------------------------------------------------^7")
+                    print(("^1[Update Available] ^7%s^7"):format(cache.resource))
+                    print(("^3Current: ^7%s | ^2Latest: ^7%s^7"):format(currentVersion, newestVersion))
+                    print(("^5Notes: ^7%s^7"):format(description))
                     if filesChanged ~= "" then
                         print("^3Files Changed:")
                         for file in filesChanged:gmatch("([^,]+)") do
-                            print(("^7 - %s^4"):format(file:gsub("^%s*(.-)%s*$", "%1")))
+                            print(("^7 - %s^7"):format(file:gsub("^%s*(.-)%s*$", "%1")))
                         end
                     end
-                    print(("^3Download: ^7https://github.com/dotexestudios/exe_helicam^4"):format(githubRepo))
-                    print("^1-------------------------------------------------------\n^4")
+                    print(("^3Download: ^7https://github.com/dotexestudios/exe_helicam^7"):format(githubRepo))
+                    print("^1-------------------------------------------------------\n^7")
                 elseif comparison == 1 then
-                    print(("^3[Developer] ^7%s is running a higher version than the repo (v%s)^4"):format(cache.resource, currentVersion))
+                    print(("^3[Developer] ^7%s is running a higher version than the repo (v%s)^7"):format(cache.resource, currentVersion))
                 else
-                    print(("^2[Success] ^7%s is up to date (v%s)^4"):format(cache.resource, currentVersion))
+                    print(("^2[Success] ^7%s is up to date (v%s)^7"):format(cache.resource, currentVersion))
                 end
             end
         else
-            print(("^1[Error] ^7Could not check version for %s"^4):format(cache.resource))
+            print(("^1[Error] ^7Could not check version for %s^7"):format(cache.resource))
         end
     end, "GET", "", "")
 end
