@@ -1,26 +1,45 @@
 local color = "^4"
 local white = "^7"
 local logo = [[
-                                     ▄▄▄▄    ▄               █    ▀
-         ▄▄▄   ▄   ▄   ▄▄▄          █▀   ▀ ▄▄█▄▄  ▄   ▄   ▄▄▄█  ▄▄▄     ▄▄▄    ▄▄▄
-        █▀  █   █▄█   █▀  █         ▀█▄▄▄    █    █   █  █▀ ▀█    █    █▀ ▀█  █   ▀
-        █▀▀▀▀   ▄█▄   █▀▀▀▀             ▀█   █    █   █  █   █    █    █   █   ▀▀▀▄
-   █    ▀█▄▄▀  ▄▀ ▀▄  ▀█▄▄▀         ▀▄▄▄█▀   ▀▄▄  ▀▄▄▀█  ▀█▄██  ▄▄█▄▄  ▀█▄█▀  ▀▄▄▄▀
+                                     ▄▄▄▄    ▄               █    ▀
+         ▄▄▄   ▄   ▄   ▄▄▄          █▀   ▀ ▄▄█▄▄  ▄   ▄   ▄▄▄█  ▄▄▄     ▄▄▄    ▄▄▄
+        █▀  █   █▄█   █▀  █         ▀█▄▄▄    █    █   █  █▀ ▀█    █    █▀ ▀█  █   ▀
+        █▀▀▀▀   ▄█▄   █▀▀▀▀             ▀█   █    █   █  █   █    █    █   █   ▀▀▀▄
+   █    ▀█▄▄▀  ▄▀ ▀▄  ▀█▄▄▀         ▀▄▄▄█▀   ▀▄▄  ▀▄▄▀█  ▀█▄██  ▄▄█▄▄  ▀█▄█▀  ▀▄▄▄▀
 ]]
-
 
 local currentVersion = GetResourceMetadata(cache.resource, 'version', 0)
 local githubRepo = "dotexestudios/exe_helicam"
 
 local function checkVersion()
     print(color .. logo .. white)
-    PerformHttpRequest("https://raw.githubusercontent.com/" .. githubRepo .. "/refs/heads/main/version", function(err, newestVersion, headers)
-        if newestVersion then
-            newestVersion = newestVersion:gsub("%s+", "")
-            if newestVersion ~= currentVersion then
+    PerformHttpRequest("https://raw.githubusercontent.com/" .. githubRepo .. "/refs/heads/main/version", function(err, responseText, headers)
+        if responseText then
+            local data = {}
+            for line in responseText:gmatch("[^\r\n]+") do
+                local key, value = line:match("^(.-):%s*(.*)$")
+                if key and value then
+                    data[key] = value
+                end
+            end
+
+            local newestVersion = data["version"]
+            local description = data["version_description"] or "No description provided"
+            local filesChanged = data["files_changed"] or ""
+
+            if newestVersion and newestVersion ~= currentVersion then
                 print("\n^1-------------------------------------------------------")
                 print(("^1[Update Available] ^7%s"):format(cache.resource))
                 print(("^3Current: ^7%s | ^2Latest: ^7%s"):format(currentVersion, newestVersion))
+                print(("^5Notes: ^7%s"):format(description))
+
+                if filesChanged ~= "" then
+                    print("^3Files Changed:")
+                    for file in filesChanged:gmatch("([^,]+)") do
+                        print(("^7 - %s"):format(file:gsub("^%s*(.-)%s*$", "%1")))
+                    end
+                end
+
                 print(("^3Download: ^7https://github.com/%s"):format(githubRepo))
                 print("^1-------------------------------------------------------\n")
             else
