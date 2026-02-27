@@ -1,7 +1,7 @@
 -- FiveM Heli Cam by mraes, version 1.3 (2017-06-12)
 -- Modified by rjross2013 (2017-06-23)
 -- Further modified by Loque (2017-08-15) with credits to the following for tips gleaned from their scripts: Guadmaz's Simple Police Searchlight, devilkkw's Speed Camera, nynjardin's Simple Outlaw Alert and IllidanS4's FiveM Entity Iterators.
--- Converted to ox_lib keybinds by .exe Studios (filo) (2026-02-19)
+-- Converted to ox_lib keybinds by Polaris Labs (filo) (2026-02-19)
 
 ---=========================
 --- Config				====

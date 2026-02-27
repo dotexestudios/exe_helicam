@@ -9,7 +9,7 @@ local logo = [[
 ]]
 
 local currentVersion = GetResourceMetadata(cache.resource, 'version', 0)
-local githubRepo = "dotexestudios/exe_versions"
+local githubRepo = "polarislabsco/plrs_versions"
 
 local function compareVersions(v1, v2)
     local parts1 = {}
@@ -55,7 +55,7 @@ local function checkVersion()
                             print(("^7 - %s^7"):format(file:gsub("^%s*(.-)%s*$", "%1")))
                         end
                     end
-                    print(("^3Download: ^7https://github.com/dotexestudios/exe_helicam^7"):format(githubRepo))
+                    print(("^3Download: ^7https://github.com/polarislabsco/plrs_helicam^7"):format(githubRepo))
                     print("^1-------------------------------------------------------\n^7")
                 elseif comparison == 1 then
                     print(("^3[Developer] ^7%s is running a higher version than the repo (v%s)^7"):format(cache.resource, currentVersion))
@@ -76,10 +76,10 @@ AddEventHandler("onResourceStart", function(resource)
 end)
 
 CreateThread(function()
-    if cache.resource ~= "exe_helicam" then
+    if cache.resource ~= "plrs_helicam" then
         while true do
             Wait(5000)
-            print("Cannot check version for exe_helicam, make sure you are using the correct resource name")
+            print("Cannot check version for plrs_helicam, make sure you are using the correct resource name")
         end
     end
 end)

@@ -3,7 +3,7 @@ game "gta5"
 lua54 "yes"
 
 original_author "ZeroFour04"
-author ".exe Studios (filo)"
+author "Polaris Labs (filo)"
 description "A FiveM helicoper camera script"
 discord "https://discord.gg/EWKWXVBHK7"
 

@@ -14,7 +14,7 @@ A highly refactored and performance-optimized version of the original **FiveM-He
 3. **Add** the following to your `server.cfg`:
 
 ```cfg
-ensure exe_helicam
+ensure polaris_helicam
 ```
 
 ## Credits & Acknowledgments
